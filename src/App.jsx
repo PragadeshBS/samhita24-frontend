@@ -6,8 +6,8 @@ import { useAuthContext } from "./hooks/useAuthContext";
 
 import Navbar from "./components/navbar/Navbar";
 import Loading from "./pages/loader/loading.svg";
-import Header from "./components/templates/Header";
 import Router from "./Router";
+import Footer from "./components/footer/Footer";
 
 function App() {
   const authContext = useAuthContext();
@@ -20,9 +20,9 @@ function App() {
     <div>
       <ReactNotifications />
       <BrowserRouter>
-        {/* <Header /> */}
-        {/* <Navbar /> */}
+        <Navbar />
         <Router authContext={authContext} />
+        <Footer />
       </BrowserRouter>
     </div>
   );

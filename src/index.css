@@ -12,37 +12,97 @@
   src: url("Montserrat.ttf");
 }
 
-.logo-text {
-  font-family: "Gugi";
-  @apply text-8xl 2xl:text-9xl;
-}
-
-.logo-text-container {
-  position: absolute;
-  top: 20rem;
-  right: 0.01rem;
-}
-
-* {
+body {
   font-family: "Montserrat";
+  @apply bg-primary;
 }
 
-.hero-grid {
+.samhita-font {
+  font-family: "Gugi";
+}
+
+.about-samhita-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 6rem 0px;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  gap: 2em 0em;
   grid-auto-flow: row;
+  justify-content: center;
+  align-content: stretch;
+  justify-items: center;
   grid-template-areas:
-    ". . ."
-    ". . logo-text-grid"
-    "countdown-grid countdown-grid countdown-grid";
+    "technical-area"
+    "non-technical-area"
+    "workshops-area"
+    "signature-area";
 }
 
-.logo-text-grid {
-  grid-area: logo-text-grid;
+.technical-area {
+  grid-area: technical-area;
 }
 
-.countdown-grid {
-  grid-area: countdown-grid;
+.non-technical-area {
+  grid-area: non-technical-area;
+}
+
+.workshops-area {
+  grid-area: workshops-area;
+}
+
+.signature-area {
+  grid-area: signature-area;
+}
+
+@media (min-width: 768px) {
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    gap: 0em 10em;
+    grid-auto-flow: row;
+    grid-template-areas:
+      ". ."
+      ". logo-area"
+      ". countdown-area"
+      ". .";
+  }
+
+  .logo-text-area {
+    grid-area: logo-area;
+  }
+
+  .countdown-area {
+    grid-area: countdown-area;
+  }
+
+  .about-samhita-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2em 2em;
+    grid-auto-flow: row;
+    justify-content: center;
+    align-content: stretch;
+    justify-items: center;
+    grid-template-areas:
+      "technical-area technical-area non-technical-area non-technical-area"
+      ". workshops-area workshops-area ."
+      "signature-area signature-area signature-area signature-area";
+  }
+
+  .technical-area {
+    grid-area: technical-area;
+  }
+
+  .non-technical-area {
+    grid-area: non-technical-area;
+  }
+
+  .workshops-area {
+    grid-area: workshops-area;
+  }
+
+  .signature-area {
+    grid-area: signature-area;
+  }
 }

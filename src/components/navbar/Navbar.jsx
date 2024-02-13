@@ -1,131 +1,139 @@
-import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useAuthContext } from "../../hooks/useAuthContext";
-import { useLogout } from "../../hooks/useLogout";
-import SearchBar from "./SearchBar";
+import {
+  Navbar as MTNavbar,
+  Collapse,
+  Button,
+  IconButton,
+  Typography,
+} from "@material-tailwind/react";
+import {
+  RectangleStackIcon,
+  XMarkIcon,
+  Bars3Icon,
+  CodeBracketIcon,
+  PresentationChartBarIcon,
+} from "@heroicons/react/24/solid";
+import { useState, useEffect } from "react";
 
-const Navbar = () => {
-  const { user, token } = useAuthContext();
-  const { logout } = useLogout();
-  const navigate = useNavigate();
-  const [admin, setAdmin] = useState(false);
+function NavItem({ children, href }) {
+  return (
+    <li>
+      <Typography
+        as="a"
+        href={href || "#"}
+        variant="paragraph"
+        className="flex items-center gap-2 font-medium"
+      >
+        {children}
+      </Typography>
+    </li>
+  );
+}
+
+const NAV_MENU = [
+  {
+    name: "Events",
+    icon: RectangleStackIcon,
+  },
+  {
+    name: "Workshops",
+    icon: PresentationChartBarIcon,
+  },
+  {
+    name: "Hackathons",
+    icon: CodeBracketIcon,
+  },
+];
+
+export function Navbar() {
+  const [open, setOpen] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  const handleOpen = () => setOpen((cur) => !cur);
+
   useEffect(() => {
-    axios
-      .get("/api/users", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => {
-        setAdmin(res.data.isAdmin);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [token]);
+    window.addEventListener(
+      "resize",
+      () => window.innerWidth >= 960 && setOpen(false)
+    );
+  }, []);
+
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY > 0) {
+        setIsScrolling(true);
+      } else {
+        setIsScrolling(false);
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <nav className="navbar navbar-expand-lg bg-light">
-      <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          Events
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            {admin && (
-              <li className="nav-item">
-                <Link className="nav-link active" to="/archives">
-                  Archives
-                </Link>
-              </li>
-            )}
-            {admin && (
-              <li className="nav-item">
-                <Link className="nav-link active" to="/eventcreationform">
-                  Create Event
-                </Link>
-              </li>
-            )}
-          </ul>
-          {!user && (
-            <>
-              <div className="m-2">
-                <button
-                  onClick={() => navigate("/login")}
-                  className="btn btn-outline-primary"
-                >
-                  Login
-                </button>
-              </div>
-              <div className="m-2">
-                <button
-                  className="btn btn-primary"
-                  onClick={() => navigate("/signup")}
-                >
-                  Sign Up
-                </button>
-              </div>
-            </>
-          )}
-          {user && (
-            <ul className="navbar-nav">
-              <li className="nav-item dropdown">
-                <span
-                  className="nav-link dropdown-toggle"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                >
-                  {user}
-                </span>
-                <ul className="dropdown-menu">
-                  <li>
-                    <Link className="dropdown-item" to="/profile">
-                      My profile
-                    </Link>
-                  </li>
-                  {admin && (
-                    <li>
-                      <Link className="dropdown-item" to="/organised-events">
-                        Organised events
-                      </Link>
-                    </li>
-                  )}
-                  <li>
-                    <Link className="dropdown-item" to="/participated-events">
-                      Participated events
-                    </Link>
-                  </li>
-                  <li>
-                    <button
-                      className="dropdown-item"
-                      onClick={() => {
-                        logout();
-                        navigate("/");
-                      }}
-                    >
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          )}
-          <form className="d-flex" role="search">
-            <SearchBar />
-          </form>
+    <MTNavbar
+      shadow={false}
+      fullWidth
+      blurred={false}
+      // color={isScrolling ? "white" : "transparent"}
+      className={`${
+        isScrolling ? "bg-primary" : "bg-transparent"
+      } fixed top-0 z-50 border-0`}
+    >
+      <div className="container mx-auto flex items-center justify-between">
+        <Typography color="white" className="text-2xl samhita-font">
+          SAMHITA '24
+        </Typography>
+        <ul className={`ml-10 hidden items-center gap-6 lg:flex text-white`}>
+          {NAV_MENU.map(({ name, icon: Icon, href }) => (
+            <NavItem key={name} href={href}>
+              <Icon className="h-5 w-5" />
+              <span>{name}</span>
+            </NavItem>
+          ))}
+        </ul>
+        <div className="hidden items-center gap-4 lg:flex">
+          <Button color="white" variant="text">
+            Log in
+          </Button>
+          <a href="#">
+            <Button color="white">Register</Button>
+          </a>
         </div>
+        <IconButton
+          variant="text"
+          color="white"
+          onClick={handleOpen}
+          className="ml-auto inline-block lg:hidden"
+        >
+          {open ? (
+            <XMarkIcon strokeWidth={2} className="h-6 w-6" />
+          ) : (
+            <Bars3Icon strokeWidth={2} className="h-6 w-6" />
+          )}
+        </IconButton>
       </div>
-    </nav>
+      <Collapse open={open}>
+        <div className="container mx-auto mt-4 rounded-lg bg-white px-6 py-5">
+          <ul className="flex flex-col gap-4 text-gray-900">
+            {NAV_MENU.map(({ name, icon: Icon, href }) => (
+              <NavItem key={name} href={href}>
+                <Icon className="h-5 w-5" />
+                {name}
+              </NavItem>
+            ))}
+          </ul>
+          <div className="mt-6 flex items-center gap-4">
+            <Button variant="text">Log in</Button>
+            <a href="#">
+              <Button color="gray">Register</Button>
+            </a>
+          </div>
+        </div>
+      </Collapse>
+    </MTNavbar>
   );
-};
+}
+
 export default Navbar;

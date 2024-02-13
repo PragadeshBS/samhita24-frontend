@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const Countdown = () => {
+const Countdown = () => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
@@ -25,23 +25,28 @@ export const Countdown = () => {
   }
 
   return (
-    <div className="flex justify-evenly md:text-6xl bg-gray-900/70 rounded-full py-3 text-white">
-      <div className="flex flex-col items-center">
-        <p className="font-extrabold">{days}</p>
-        <span>days</span>
-      </div>
-      <div className="flex flex-col items-center">
-        <p className="font-extrabold">{hours}</p>
-        <span>hours</span>
-      </div>
-      <div className="flex flex-col items-center">
-        <p className="font-extrabold">{minutes}</p>
-        <span>mins</span>
-      </div>
-      <div className="flex flex-col items-center">
-        <p className="font-extrabold">{seconds}</p>
-        <span>seconds</span>
+    <div className="text-white">
+      <div className="text-center mt-3">16 - 17 March 2024</div>
+      <div className="flex mt-10 justify-evenly md:text-4xl bg-gray-900/70 rounded-full py-3">
+        <div className="flex flex-col items-center">
+          <p className="font-extrabold">{days}</p>
+          <span>days</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <p className="font-extrabold">{hours}</p>
+          <span>hours</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <p className="font-extrabold">{minutes}</p>
+          <span>mins</span>
+        </div>
+        <div className="flex flex-col items-center">
+          <p className="font-extrabold">{seconds}</p>
+          <span>secs</span>
+        </div>
       </div>
     </div>
   );
 };
+
+export default Countdown;
