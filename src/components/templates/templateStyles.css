@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Josefin+Slab:wght@600&display=swap');
+
+.title-text{
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.subtitle-text{
+  font-family: 'Josefin Slab', serif;
+}
+
+.logo-img {
+  max-width: 100px;
+}
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbarLink {
+  color: white !important;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -1px;
+}
+
+.navbar-nav li:hover > ul.dropdown-menu {
+  display: block;
+}
+
+#atom-icon {
+  filter: invert(100);
+}
+
+@media only screen and (max-width: 576px) {
+  .title {
+    order: -1;
+  }
+  .top {
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .logo-img {
+    max-width: 60px;
+  }
+}

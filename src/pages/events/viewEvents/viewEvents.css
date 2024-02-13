@@ -1,0 +1,39 @@
+.highlight {
+  background-color: #ffff00;
+  margin: 0px;
+  padding: 0px;
+}
+.hide {
+  display: none;
+}
+.view {
+  display: block;
+}
+
+
+.pop-out-card{
+  transform-style:preserve-3d;
+  transition:.5s ease;
+}
+.pop-out-card:hover {
+  box-shadow: 2px 12px 15px #999;
+  box-shadow:2px 2px 0 3px blue;
+  transition: .4s ease;
+}
+.pop-out-card.with-transform:hover {
+  transform: translateY(-30px);
+}
+
+.animateText {
+  transform: translateZ(300px)scale(.2);
+  animation: slideUp .8s ease forwards .5s;
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateZ(300px)scale(.2);
+  }
+  100% {
+    transform: translateZ(0px)scale(1);
+  }
+}

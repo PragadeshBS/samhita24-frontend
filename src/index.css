@@ -1,0 +1,48 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Gugi";
+  src: url("Gugi.ttf");
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("Montserrat.ttf");
+}
+
+.logo-text {
+  font-family: "Gugi";
+  @apply text-8xl 2xl:text-9xl;
+}
+
+.logo-text-container {
+  position: absolute;
+  top: 20rem;
+  right: 0.01rem;
+}
+
+* {
+  font-family: "Montserrat";
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: 6rem 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    ". . ."
+    ". . logo-text-grid"
+    "countdown-grid countdown-grid countdown-grid";
+}
+
+.logo-text-grid {
+  grid-area: logo-text-grid;
+}
+
+.countdown-grid {
+  grid-area: countdown-grid;
+}
