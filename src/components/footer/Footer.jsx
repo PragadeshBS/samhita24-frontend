@@ -1,7 +1,6 @@
 import { Typography, Button, IconButton } from "@material-tailwind/react";
-import { FaGithub, FaInstagram } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
-const CURRENT_YEAR = new Date().getFullYear();
 const LINKS = ["About ITA", "Contact Us", "Privacy Policy"];
 
 function Footer() {
@@ -52,14 +51,6 @@ function Footer() {
                 <FaInstagram className="text-white" />
               </a>
             </IconButton>
-            <IconButton size="sm" color="blue" variant="text">
-              <a
-                href="https://github.com/PragadeshBS/samhita24-frontend"
-                target="_blank"
-              >
-                <FaGithub className="text-white" />
-              </a>
-            </IconButton>
           </div>
         </div>
         <Typography
@@ -70,6 +61,7 @@ function Footer() {
           <a
             href="https://github.com/PragadeshBS/samhita24-frontend"
             target="_blank"
+            className="underline"
           >
             SAMHITA team
           </a>{" "}
