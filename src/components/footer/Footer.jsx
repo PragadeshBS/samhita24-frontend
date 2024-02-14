@@ -1,7 +1,8 @@
 import { Typography, Button, IconButton } from "@material-tailwind/react";
+import { FaGithub, FaInstagram } from "react-icons/fa";
 
 const CURRENT_YEAR = new Date().getFullYear();
-const LINKS = ["ITA", "About Us", "Contact Us", "Privacy Policy"];
+const LINKS = ["About ITA", "Contact Us", "Privacy Policy"];
 
 function Footer() {
   return (
@@ -21,7 +22,7 @@ function Footer() {
             Don&apos;t miss out on this exclusive offer that will end soon.
           </Typography>
           <div className="flex w-full md:w-fit gap-3 mt-2 flex-col md:flex-row">
-            <Button color="white" size="md">
+            <Button className="bg-primaryLight" size="md">
               buy ticket
             </Button>
           </div>
@@ -46,17 +47,18 @@ function Footer() {
             ))}
           </ul>
           <div className="flex w-fit justify-center gap-2">
-            <IconButton size="sm" color="gray" variant="text">
-              <i className="fa-brands fa-twitter text-lg" />
+            <IconButton size="sm" color="blue" variant="text">
+              <a href="https://www.instagram.com/samhita_mit" target="_blank">
+                <FaInstagram className="text-white" />
+              </a>
             </IconButton>
-            <IconButton size="sm" color="gray" variant="text">
-              <i className="fa-brands fa-youtube text-lg" />
-            </IconButton>
-            <IconButton size="sm" color="gray" variant="text">
-              <i className="fa-brands fa-instagram text-lg" />
-            </IconButton>
-            <IconButton size="sm" color="gray" variant="text">
-              <i className="fa-brands fa-github text-lg" />
+            <IconButton size="sm" color="blue" variant="text">
+              <a
+                href="https://github.com/PragadeshBS/samhita24-frontend"
+                target="_blank"
+              >
+                <FaGithub className="text-white" />
+              </a>
             </IconButton>
           </div>
         </div>
@@ -64,14 +66,13 @@ function Footer() {
           color="blue-gray"
           className="text-center mt-12 font-normal !text-gray-700"
         >
-          &copy; {CURRENT_YEAR}. Made with ❤️ by the{" "}
+          Made with ❤️ by the{" "}
           <a
             href="https://github.com/PragadeshBS/samhita24-frontend"
             target="_blank"
           >
-            SAMHITA
+            SAMHITA team
           </a>{" "}
-          team. All rights reserved.
         </Typography>
       </div>
     </footer>
