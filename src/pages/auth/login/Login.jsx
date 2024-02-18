@@ -1,10 +1,10 @@
-import Header from "../../../components/events/Header";
 import { useForm } from "react-hook-form";
-import loginStyles from "./loginStyles.module.css";
 import { useLogin } from "../../../hooks/useLogin";
 import { useAuthContext } from "../../../hooks/useAuthContext";
 import { Link, Navigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
+import { Input, Typography, Button } from "@material-tailwind/react";
+import Danger from "../../../components/alerts/Danger";
 
 const Login = () => {
   const { user } = useAuthContext();
@@ -27,72 +27,50 @@ const Login = () => {
   }
 
   return (
-    <div className="EventCreationPage container">
-      <div className="row pb-5">
-        <div className="px-5">
-          <Header title={"Login"} />
-        </div>
-        <div className="col-lg-8 mx-auto">
-          <div className="EventCreationForm py-4 px-3 border shadow rounded">
-            {(flow || isLoading) && (
-              <div className="alert alert-info text-center mx-auto">
-                {isLoading
-                  ? "Weaving the login magic, almost there..."
-                  : "Your journey begins with a login. Go ahead!"}
-              </div>
-            )}
-            <form className="pt-3" onSubmit={handleSubmit(addUser)}>
-              <div className="form-group">
-                <label>
-                  Email <span className="text-danger">*</span>
-                </label>
-                <input
-                  type="text"
-                  className={`form-control mx-auto m-3  ${
-                    errors.email ? loginStyles.errorInput : ""
-                  }`}
-                  {...register("email", { required: "Email is required" })}
-                ></input>
+    <div className="container mx-auto">
+      <div className="page-view">
+        <div>
+          <div className=" max-w-xl">
+            <Typography variant="h1" className="mb-3">
+              Login
+            </Typography>
+            <form onSubmit={handleSubmit(addUser)}>
+              <div className="my-3">
+                <Input
+                  label="Email"
+                  type="email"
+                  size="lg"
+                  color={errors.email ? "red" : "white"}
+                  {...register("email", { required: true })}
+                />
                 {errors.email && (
-                  <span className={`${loginStyles.error} `}>
-                    {errors.email.message}
-                  </span>
+                  <span className="text-red-400">This field is required</span>
                 )}
               </div>
-              <div className="form-group">
-                <label>
-                  Password <span className="text-danger">*</span>
-                </label>
-                <input
+              <div className="my-3">
+                <Input
+                  label="Password"
                   type="password"
-                  className={`form-control m-3 mx-auto  ${
-                    errors.email ? loginStyles.errorInput : ""
-                  }`}
-                  {...register("password", {
-                    required: "Password is required",
-                  })}
-                ></input>
+                  color={errors.password ? "red" : "white"}
+                  size="lg"
+                  {...register("password", { required: true })}
+                />
                 {errors.password && (
-                  <span className={`${loginStyles.error} `}>
-                    {errors.password.message}
-                  </span>
+                  <span className="text-red-400">This field is required</span>
                 )}
               </div>
-              {error && <div className="alert alert-danger">{error}</div>}
-              <div className="form-group  text-center">
-                <button
-                  type="submit"
-                  className="btn btn-primary my-2 ms-1 btn-lg"
-                >
-                  Login
-                </button>
-              </div>
-              <div>
-                <div className="small text-muted">
-                  Don't have an account? <Link to="/signup">Sign up</Link> here.
-                </div>
-              </div>
+              {error && <Danger text={error} />}
+              <Button
+                className="rounded-full bg-primaryLight"
+                type="submit"
+                disabled={isLoading}
+              >
+                Login
+              </Button>
             </form>
+            <div className="my-3 text-sm">
+              <Link to="#">Forgot your password?</Link>
+            </div>
           </div>
         </div>
       </div>

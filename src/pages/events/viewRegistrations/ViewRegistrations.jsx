@@ -49,8 +49,8 @@ const ViewRegistrations = () => {
   return (
     <div className="container" style={backGroundStyles}>
       <h1 className="display-3">Participants</h1>
-      <p class="text-muted">
-        <a href="#" class="text-reset">
+      <p className="text-muted">
+        <a href="#" className="text-reset">
           <h3>{event.eventName}</h3>
         </a>
       </p>

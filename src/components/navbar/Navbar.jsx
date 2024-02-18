@@ -13,6 +13,7 @@ import {
   PresentationChartBarIcon,
 } from "@heroicons/react/24/solid";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavItem({ children, href }) {
   return (
@@ -47,6 +48,7 @@ const NAV_MENU = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
+  const navigate = useNavigate();
 
   const handleOpen = () => setOpen((cur) => !cur);
 
@@ -71,18 +73,29 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleLogin = () => {
+    navigate("login");
+  };
+
+  const handleHome = () => {
+    navigate("/");
+  };
+
   return (
     <MTNavbar
       shadow={false}
       fullWidth
       blurred={false}
-      // color={isScrolling ? "white" : "transparent"}
       className={`${
         isScrolling ? "bg-primary" : "bg-transparent"
       } fixed top-0 z-50 border-0`}
     >
       <div className="container mx-auto flex items-center justify-between">
-        <Typography color="white" className="text-2xl samhita-font">
+        <Typography
+          color="white"
+          className="text-2xl samhita-font cursor-pointer"
+          onClick={handleHome}
+        >
           SAMHITA '24
         </Typography>
         <ul className={`ml-10 hidden items-center gap-6 lg:flex text-white`}>
@@ -94,7 +107,7 @@ export function Navbar() {
           ))}
         </ul>
         <div className="hidden items-center gap-4 lg:flex">
-          <Button color="white" variant="text">
+          <Button color="white" variant="text" onClick={handleLogin}>
             Log in
           </Button>
           <a href="#">
@@ -125,7 +138,9 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 flex items-center gap-4">
-            <Button variant="text">Log in</Button>
+            <Button variant="text" onClick={handleLogin}>
+              Log in
+            </Button>
             <a href="#">
               <Button color="gray">Register</Button>
             </a>

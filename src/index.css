@@ -14,11 +14,24 @@
 
 body {
   font-family: "Montserrat";
-  @apply bg-primary;
+  @apply bg-primary text-white;
 }
 
 .samhita-font {
   font-family: "Gugi";
+}
+
+.page-view {
+  @apply flex flex-col justify-center h-96 px-10 mt-10;
+  min-height: 60vh;
+}
+
+h1 {
+  font-family: "Montserrat" !important;
+}
+
+a {
+  @apply hover:underline;
 }
 
 .about-samhita-grid {
