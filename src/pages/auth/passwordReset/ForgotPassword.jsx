@@ -3,7 +3,9 @@ import { useState } from "react";
 import axios from "axios";
 import { Button, Input, Typography } from "@material-tailwind/react";
 import Info from "../../../components/alerts/Info";
-import ReactWhatsapp from "react-whatsapp";
+import Success from "../../../components/alerts/Success";
+import { MdAlternateEmail } from "react-icons/md";
+import { FaWhatsapp } from "react-icons/fa";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
@@ -30,9 +32,15 @@ const ForgotPassword = () => {
         <Typography variant="h1" className="mb-3">
           Forgot Password
         </Typography>
+        <div className="max-w-2xl">
+          <Info>
+            Password reset links will not be sent automatically. Please contact
+            us after submitting this form
+          </Info>
+        </div>
         <div>
           <form className="pt-3" onSubmit={handleSubmit}>
-            <div className="my-3 max-w-xl">
+            <div className="my-3 max-w-2xl">
               <Input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -52,30 +60,36 @@ const ForgotPassword = () => {
               </Button>
             </div>
             {showMsg && (
-              <div className="my-3 max-w-xl">
-                <Info>
+              <div className="my-3 max-w-2xl">
+                <Success>
                   <div>
                     <p>
                       Your password reset was raised. Please contact us to get
                       the password reset link
                     </p>
                   </div>
-                </Info>
-                <p className="text-center">
-                  <a
-                    href="mailto:pragadeshbs+samhita-reset-password@pm.me"
-                    className="underline"
-                  >
-                    <span>Email us</span>
-                  </a>
-                  &nbsp;or&nbsp;
-                  <a
-                    href={`https://wa.me/+919443389893?text=${whatsappMsg}`}
-                    className="underline"
-                  >
-                    WhatsApp us
-                  </a>
-                </p>
+                  <p>
+                    <a
+                      href={`https://wa.me/+919443389893?text=${whatsappMsg}`}
+                      className="underline"
+                    >
+                      <div className="flex items-center text-lg gap-1">
+                        <FaWhatsapp />
+                        <div>WhatsApp us</div>
+                      </div>
+                    </a>
+                    &nbsp;or&nbsp;
+                    <a
+                      href="mailto:pragadeshbs+samhita-reset-password@pm.me"
+                      className="underline"
+                    >
+                      <div className="flex items-center text-lg gap-1">
+                        <MdAlternateEmail />
+                        <div>Email us</div>
+                      </div>
+                    </a>
+                  </p>
+                </Success>
               </div>
             )}
             <div>
