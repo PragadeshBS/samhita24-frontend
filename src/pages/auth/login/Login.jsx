@@ -5,6 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useSearchParams } from "react-router-dom";
 import { Input, Typography, Button } from "@material-tailwind/react";
 import Danger from "../../../components/alerts/Danger";
+import Info from "../../../components/alerts/Info";
 
 const Login = () => {
   const { user } = useAuthContext();
@@ -30,10 +31,12 @@ const Login = () => {
     <div className="container mx-auto">
       <div className="page-view">
         <div>
-          <div className=" max-w-xl">
-            <Typography variant="h1" className="mb-3">
-              Login
-            </Typography>
+          <div className="max-w-xl">
+            <Typography variant="h1">Login</Typography>
+            <Info>
+              If you had registered for Mutex 2023, please login with the same
+              credentials
+            </Info>
             <form onSubmit={handleSubmit(addUser)}>
               <div className="my-3">
                 <Input
@@ -59,7 +62,7 @@ const Login = () => {
                   <span className="text-red-400">This field is required</span>
                 )}
               </div>
-              {error && <Danger text={error} />}
+              {error && <Danger>{error}</Danger>}
               <Button
                 className="rounded-full bg-primaryLight"
                 type="submit"
@@ -69,7 +72,7 @@ const Login = () => {
               </Button>
             </form>
             <div className="my-3 text-sm">
-              <Link to="#">Forgot your password?</Link>
+              <Link to="/forgot-password">Forgot your password?</Link>
             </div>
           </div>
         </div>

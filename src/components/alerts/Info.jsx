@@ -1,7 +1,7 @@
-const Danger = ({ children }) => {
+const Info = ({ children }) => {
   return (
     <div
-      className="flex my-3 items-center p-4 mb-4 text-sm border rounded-lg text-red-400 border-red-800 bg-primary"
+      className="flex my-3 items-center p-4 mb-4 text-sm border rounded-lg text-blue-400 border-blue-800 bg-primary"
       role="alert"
     >
       <svg
@@ -20,4 +20,4 @@ const Danger = ({ children }) => {
     </div>
   );
 };
-export default Danger;
+export default Info;

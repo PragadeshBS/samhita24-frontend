@@ -107,12 +107,14 @@ export function Navbar() {
           ))}
         </ul>
         <div className="hidden items-center gap-4 lg:flex">
-          <Button color="white" variant="text" onClick={handleLogin}>
+          {/* <Button color="white" variant="text" onClick={handleLogin}>
             Log in
-          </Button>
-          <a href="#">
-            <Button color="white">Register</Button>
-          </a>
+          </Button> */}
+          <span>
+            <Button color="white" onClick={handleLogin}>
+              Log in
+            </Button>
+          </span>
         </div>
         <IconButton
           variant="text"
@@ -138,12 +140,14 @@ export function Navbar() {
             ))}
           </ul>
           <div className="mt-6 flex items-center gap-4">
-            <Button variant="text" onClick={handleLogin}>
+            {/* <Button variant="text" onClick={handleLogin}>
               Log in
-            </Button>
-            <a href="#">
-              <Button color="gray">Register</Button>
-            </a>
+            </Button> */}
+            <span>
+              <Button color="gray" onClick={handleLogin}>
+                Log in
+              </Button>
+            </span>
           </div>
         </div>
       </Collapse>

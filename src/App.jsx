@@ -5,6 +5,8 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import Layout from "./layouts/Layout";
 import Home from "./pages/home/Home";
 import Login from "./pages/auth/login/Login";
+import ForgotPassword from "./pages/auth/passwordReset/ForgotPassword";
+import PasswordReset from "./pages/auth/passwordReset/PasswordReset";
 
 function App() {
   const authContext = useAuthContext();
@@ -23,6 +25,14 @@ function App() {
         {
           path: "login",
           element: <Login />,
+        },
+        {
+          path: "forgot-password",
+          element: <ForgotPassword />,
+        },
+        {
+          path: "reset-password",
+          element: <PasswordReset />,
         },
       ],
     },

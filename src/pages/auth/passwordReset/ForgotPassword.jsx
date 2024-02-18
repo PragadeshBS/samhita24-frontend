@@ -1,11 +1,15 @@
-import Header from "../../../components/events/Header";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { Button, Input, Typography } from "@material-tailwind/react";
+import Info from "../../../components/alerts/Info";
+import ReactWhatsapp from "react-whatsapp";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
   const [showMsg, setShowMsg] = useState(false);
+  const [whatsappMsg, setWhatsappMsg] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
@@ -13,50 +17,73 @@ const ForgotPassword = () => {
         email,
       })
       .then(() => {
+        setWhatsappMsg(
+          `Hi! This is ${email}. I have raised a request to reset my password. Please send my password reset link.`
+        );
         setShowMsg(true);
         setEmail("");
       });
   };
   return (
-    <div className="EventCreationPage container row mx-auto pb-5">
-      <Header title={"Reset password"} />
-      <div className="row">
-        <div className="mx-auto col-lg-8">
-          <div className="EventCreationForm py-4 px-5 border shadow rounded">
-            <form className="pt-3" onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>
-                  Email <span className="text-danger">*</span>
-                </label>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  placeholder="Enter your email"
-                  className="form-control mx-auto m-3 "
-                  required={true}
-                ></input>
+    <div className="container mx-auto">
+      <div className="page-view">
+        <Typography variant="h1" className="mb-3">
+          Forgot Password
+        </Typography>
+        <div>
+          <form className="pt-3" onSubmit={handleSubmit}>
+            <div className="my-3 max-w-xl">
+              <Input
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                type="email"
+                label="Email"
+                color="white"
+                required={true}
+              />
+            </div>
+            <div className="my-3">
+              <Button
+                type="submit"
+                className="bg-primaryLight rounded-full"
+                disabled={loading}
+              >
+                {loading ? "Loading..." : "Reset Password"}
+              </Button>
+            </div>
+            {showMsg && (
+              <div className="my-3 max-w-xl">
+                <Info>
+                  <div>
+                    <p>
+                      Your password reset was raised. Please contact us to get
+                      the password reset link
+                    </p>
+                  </div>
+                </Info>
+                <p className="text-center">
+                  <a
+                    href="mailto:pragadeshbs+samhita-reset-password@pm.me"
+                    className="underline"
+                  >
+                    <span>Email us</span>
+                  </a>
+                  &nbsp;or&nbsp;
+                  <a
+                    href={`https://wa.me/+919443389893?text=${whatsappMsg}`}
+                    className="underline"
+                  >
+                    WhatsApp us
+                  </a>
+                </p>
               </div>
-              <div className="form-group  text-center">
-                <button
-                  type="submit"
-                  className="btn btn-primary my-2 ms-1 btn-lg"
-                >
-                  Done
-                </button>
-              </div>
-              {showMsg && (
-                <div className="my-2 alert alert-success">
-                  Check your email for further instructions
-                </div>
-              )}
-              <div>
-                <Link to="/login">
-                  <span className="text-muted small">Back to login</span>
-                </Link>
-              </div>
-            </form>
-          </div>
+            )}
+            <div>
+              <Link to="/login">
+                <span className="text-muted small">Back to login</span>
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
     </div>
